@@ -6,21 +6,21 @@ const program = new Command();
 async function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case 'list':
-          const allContacts = await contacts.listContacts();
-          return console.log(allContacts)
+      console.table(await contacts.listContacts())
+      break;
     case 'get':
-          const oneContact = await contacts.getContactById(id);
-          return console.log(oneContact);
+      console.log(await contacts.getContactById(id));
+      break;
     case 'add':
-          const newContact = await contacts.addContact(name, email, phone);
-          return console.log(newContact);
+      console.log(await contacts.addContact(name, email, phone));
+      break;
     case 'remove':
-      const deletedContact = await contacts.removeContact(id);
-          return console.log(deletedContact);
+      console.log(await contacts.removeContact(id));
+      break;
     default:
       console.warn('\x1B[31m Unknown action type!');
   }
-}
+};
 
 program
   .option('-a, --action <type>', 'choose action')
